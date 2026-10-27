@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap');
+
+.fz-brief-app {
+  --fz-ink: #0d1012;
+  --fz-gray: #6b7075;
+  --fz-blue: #e4f3fa;
+  min-height: 100vh;
+  color: var(--fz-ink);
+  background: #fff;
+  font-family: Inter, Arial, sans-serif;
+  font-weight: 400;
+  text-align: left;
+}
+.fz-brief-app *, .fz-brief-app *::before, .fz-brief-app *::after { box-sizing: border-box; }
+.fz-brief-app button, .fz-brief-app input, .fz-brief-app textarea { font: inherit; }
+.fz-brief-app button { cursor: pointer; }
+.fz-brief-app button:focus-visible, .fz-brief-app input:focus-visible, .fz-brief-app textarea:focus-visible,
+.fz-brief-app a:focus-visible { outline: 2px solid #386c92; outline-offset: 3px; }
+.fz-brief-app button:disabled { cursor: default; }
+
+/* Верхняя навигация: 1440 × 116 в исходном макете. */
+.fz-header { height: 116px; padding: 24px 64px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; position: relative; z-index: 20; background: white; }
+.fz-menu-toggle { width: 68px; height: 68px; padding: 0; border: 1px solid var(--fz-ink); border-radius: 50%; background: white; display: grid; place-items: center; justify-self: start; }
+.fz-plus { position: relative; width: 24px; height: 24px; display: block; transition: transform .2s ease; }
+.fz-plus::before, .fz-plus::after { content: ''; display: block; position: absolute; background: var(--fz-ink); top: 11px; left: 0; width: 24px; height: 2px; }
+.fz-plus::after { transform: rotate(90deg); }
+.fz-menu-toggle:hover .fz-plus { transform: rotate(45deg); }
+.fz-menu-toggle.is-open .fz-plus { transform: rotate(45deg); }
+.fz-header-cta { justify-self: end; min-height: 56px; padding: 8px 40px; border: 1px solid #0d1012; background: #0d1012; color: white; border-radius: 999px; font-size: 21px; line-height: 32px; }
+.fz-header-cta:hover { background: white; color: #0d1012; }
+.fz-brand { color: var(--fz-gray); font-size: 18px; line-height: 26px; white-space: nowrap; }
+.fz-menu-panel { position: absolute; top: 116px; left: 0; width: 100%; z-index: 19; min-height: 470px; padding: 132px 64px 64px; background: white; display: flex; justify-content: space-between; box-shadow: 0 12px 24px rgba(13,16,18,.05); }
+.fz-menu-column { display: flex; flex-direction: column; gap: 80px; }
+.fz-menu-column a { color: var(--fz-ink); font-size: 30px; line-height: 38px; font-weight: 500; text-decoration: none; }
+.fz-menu-column a:hover { color: var(--fz-gray); }
+.fz-menu-separator { font-size: 32px; align-self: flex-start; font-weight: 400; }
+
+/* Поля брифа: контентная колонка начинается на x=287 при ширине 1440. */
+.fz-brief-main { min-height: calc(100vh - 116px); position: relative; padding: 78px 64px 92px; }
+.fz-brief-form { width: min(866px, 100%); margin-inline: auto; }
+.fz-is-first-step { padding-top: 16px; }
+.fz-diagonal-arrow { position: absolute; top: 16px; left: 64px; width: 56px; height: 56px; display: grid; place-items: center; font-family: Arial, sans-serif; font-size: 54px; line-height: 1; font-weight: 300; }
+.fz-contact-action { position: absolute; right: 64px; top: 30px; }
+.fz-outline-button { min-height: 48px; background: white; color: var(--fz-ink); border: 1px solid var(--fz-ink); border-radius: 999px; padding: 8px 24px; font-size: 18px !important; line-height: 26px; white-space: nowrap; transition: color .15s, background .15s; }
+.fz-outline-button:hover { color: white; background: var(--fz-ink); }
+.fz-intro { max-width: 743px; }
+.fz-intro h1 { font-size: 72px; line-height: 82px; font-weight: 500; margin: 0 0 16px; letter-spacing: -1.3px; }
+.fz-intro p { color: var(--fz-gray); font-size: 18px; line-height: 26px; }
+.fz-step-content h2 { font-size: 30px; font-weight: 500; line-height: 38px; margin: 0 0 24px; }
+.fz-first-task { margin-top: 64px; }
+.fz-task-grid { display: grid; width: 961px; grid-template-columns: 520px 405px; grid-template-rows: repeat(3, minmax(26px, auto)); grid-auto-flow: column; column-gap: 36px; row-gap: 24px; }
+.fz-radio-option { cursor: pointer; display: flex; align-items: center; gap: 16px; line-height: 26px; font-size: 18px; white-space: nowrap; }
+.fz-radio-option input { -webkit-appearance: none; appearance: none; flex: none; width: 18px; height: 18px; margin: 0; border: 1px solid var(--fz-gray); border-radius: 50%; display: grid; place-items: center; background: white; }
+.fz-radio-option input:checked { border-color: var(--fz-ink); }
+.fz-radio-option input:checked::after { content: ''; display: block; width: 10px; height: 10px; background: var(--fz-ink); border-radius: 50%; }
+.fz-textarea { display: block; width: 100%; padding: 24px; resize: vertical; border: 1px solid #edf0f2; border-radius: 0; background: #f3f5f6; color: var(--fz-ink); font-size: 16px !important; line-height: 22px; outline-offset: 0; }
+.fz-textarea-large { min-height: 200px; }
+.fz-textarea-short { min-height: 92px; }
+.fz-textarea::placeholder, .fz-input::placeholder, .fz-field input::placeholder { color: var(--fz-gray); opacity: 1; }
+.fz-upload-button { width: 310px; max-width: 100%; height: 48px; display: flex; gap: 16px; align-items: center; justify-content: center; background: #f3f5f6; cursor: pointer; font-size: 18px; }
+.fz-upload-button:hover { background: #e7ecef; }
+.fz-attachment-icon { font-size: 29px; line-height: 1; }
+.fz-file-list { display: flex; flex-direction: column; gap: 7px; padding-top: 12px; }
+.fz-file-row { display: flex; justify-content: space-between; gap: 8px; align-items: center; max-width: 100%; background: #f3f5f6; padding: 9px 14px; font-size: 14px; }
+.fz-file-row span { overflow-wrap: anywhere; }
+.fz-file-row button { border: 0; background: transparent; font-size: 22px; }
+.fz-links-textarea { min-height: 72px; margin-top: 24px; }
+.fz-help-text { margin: 24px 0 0; max-width: 866px; color: var(--fz-gray); font-size: 16px; line-height: 23px; }
+.fz-contact-grid { display: grid; grid-template-columns: minmax(0, 310px) minmax(0, 421px); justify-content: space-between; gap: 24px; }
+.fz-field { display: flex; flex-direction: column; gap: 8px; font-size: 18px; line-height: 26px; }
+.fz-field input, .fz-input { width: 100%; min-width: 0; height: 64px; padding: 0 24px; border: 1px solid #edf0f2; background: #f3f5f6; color: var(--fz-ink); border-radius: 0; font-size: 18px; line-height: 27px; }
+.fz-contacts-step h3 + .fz-contact-grid .fz-field > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.fz-contacts-step h3 + .fz-contact-grid .fz-field { gap: 0; }
+.fz-contacts-step h3 { font-size: 21px; line-height: 32px; font-weight: 500; margin: 24px 0 8px; }
+.fz-messenger { margin-top: 16px; }
+.fz-consent-option { display: flex; gap: 16px; align-items: center; margin-top: 24px; font-size: 16px; line-height: 23px; cursor: pointer; }
+.fz-consent-option input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--fz-ink); }
+.fz-form-error { margin: 18px 0 -20px; color: #a12c38; font-size: 14px; line-height: 20px; }
+.fz-step-navigation { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin-top: 40px; min-height: 48px; }
+.fz-back-button { display: flex; align-items: center; justify-self: start; gap: 16px; border: 0; background: transparent; padding: 0; font-size: 18px; line-height: 26px; }
+.fz-back-button span { font-size: 22px; }
+.fz-back-button:disabled { opacity: 0; pointer-events: none; }
+.fz-step-count { justify-self: center; color: var(--fz-gray); font-size: 12px; line-height: 15px; font-weight: 500; white-space: nowrap; }
+.fz-next-button { justify-self: end; background: var(--fz-ink); color: white; border: 1px solid var(--fz-ink); border-radius: 999px; min-height: 48px; padding: 7px 40px; font-size: 21px; line-height: 32px; white-space: nowrap; transition: background .15s, color .15s; }
+.fz-next-button:hover { background: white; color: var(--fz-ink); }
+
+/* Два голубых фрейма из Figma: 866 × 576. */
+.fz-modal-backdrop { position: fixed; inset: 0; display: flex; justify-content: center; align-items: flex-start; padding: min(29vh, 234px) 24px 24px; z-index: 50; background: rgba(13, 16, 18, .28); overflow-y: auto; }
+.fz-modal-card { width: 866px; min-height: 576px; max-width: 100%; padding: 40px; flex: none; background: var(--fz-blue); outline: none; position: relative; animation: fz-pop-in .24s ease-out both; }
+.fz-modal-x { position: absolute; top: 20px; right: 27px; border: 0; background: none; font-size: 30px; line-height: 32px; }
+.fz-modal-card h2 { font-size: 72px; line-height: 82px; font-weight: 500; margin: 0 0 104px; }
+.fz-modal-card:has(.fz-direct-contacts) h2 { margin-bottom: 40px; }
+.fz-modal-card:has(.fz-direct-contacts) h3 { margin-bottom: 104px; }
+.fz-modal-card h3 { font-size: 30px; line-height: 38px; font-weight: 500; margin: 0 0 64px; }
+.fz-modal-small { font-size: 16px; line-height: 23px; font-weight: 500; }
+.fz-demo-warning { color: #4e6875; font-size: 12px; line-height: 18px; margin-top: 32px; }
+.fz-direct-contacts { margin-top: -1px; }
+.fz-contact-phone { color: var(--fz-ink); text-decoration: none; font-size: 46px; line-height: 55px; font-weight: 500; }
+.fz-contact-hint { font-size: 21px; line-height: 32px; margin: 40px 0; }
+.fz-social-row { display: flex; align-items: center; gap: 18px; }
+.fz-social { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--fz-ink); color: white; text-decoration: none; font-size: 13px; font-weight: 500; }
+.fz-social.is-placeholder { opacity: .5; cursor: not-allowed; }
+.fz-return-button { position: fixed; right: 64px; top: 146px; height: 48px; padding: 0 24px; border: 1px solid var(--fz-ink); border-radius: 999px; background: white; font-size: 16px; }
+.fz-return-button:hover { background: white; }
+@keyframes fz-pop-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 1280px) {
+  .fz-contact-action { right: 40px; }
+  .fz-brief-form { width: min(866px, calc(100% - 80px)); }
+  .fz-brief-main { padding-left: 40px; padding-right: 40px; }
+  .fz-diagonal-arrow { left: 40px; }
+  .fz-intro h1 { font-size: clamp(44px, 5.8vw, 72px); line-height: 1.14; }
+  .fz-task-grid { width: 100%; grid-template-columns: 1fr 1fr; gap: 24px 28px; }
+  .fz-radio-option { white-space: normal; }
+}
+@media (max-width: 860px) {
+  .fz-header { padding: 20px 30px; }
+  .fz-brief-form { width: 100%; }
+  .fz-brief-main { padding: 90px 30px 70px; }
+  .fz-is-first-step { padding-top: 90px; }
+  .fz-diagonal-arrow { display: none; }
+  .fz-contact-action { right: 30px; top: 20px; }
+  .fz-contact-grid { grid-template-columns: 1fr 1fr; }
+  .fz-first-task { margin-top: 48px; }
+  .fz-menu-panel { padding: 72px 30px 48px; }
+}
+@media (max-width: 600px) {
+  .fz-header { height: 88px; padding: 12px 20px; }
+  .fz-menu-toggle { width: 52px; height: 52px; }
+  .fz-header-cta { justify-self: end; min-height: 56px; padding: 8px 40px; border: 1px solid #0d1012; background: #0d1012; color: white; border-radius: 999px; font-size: 21px; line-height: 32px; }
+.fz-header-cta:hover { background: white; color: #0d1012; }
+.fz-brand { font-size: 12px; line-height: 17px; white-space: normal; text-align: center; }
+  .fz-brief-main, .fz-is-first-step { min-height: calc(100vh - 88px); padding: 86px 20px 64px; }
+  .fz-contact-action { right: 20px; top: 18px; }
+  .fz-outline-button { font-size: 14px !important; min-height: 42px; }
+  .fz-intro h1 { font-size: 40px; line-height: 46px; letter-spacing: -.6px; }
+  .fz-intro p { font-size: 15px; line-height: 23px; }
+  .fz-step-content h2 { font-size: 25px; line-height: 32px; }
+  .fz-task-grid { grid-template-columns: 1fr; grid-template-rows: none; grid-auto-flow: row; gap: 20px; }
+  .fz-radio-option { font-size: 16px; }
+  .fz-contact-grid { grid-template-columns: 1fr; gap: 18px; }
+  .fz-contact-grid .fz-field { min-width: 0; }
+  .fz-contacts-step h3 + .fz-contact-grid .fz-field > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.fz-contacts-step h3 + .fz-contact-grid .fz-field { gap: 0; }
+.fz-contacts-step h3 { margin-top: 24px; }
+  .fz-step-navigation { grid-template-columns: 1fr 1fr; gap: 18px; }
+  .fz-step-count { grid-column: 1 / 3; grid-row: 1; }
+  .fz-back-button { grid-column: 1; grid-row: 2; }
+  .fz-next-button { grid-column: 2; grid-row: 2; padding: 7px 22px; font-size: 16px; }
+  .fz-menu-panel { top: 88px; min-height: 350px; padding: 48px 20px; }
+  .fz-menu-column { gap: 40px; }
+  .fz-menu-column a { font-size: 20px; line-height: 28px; }
+  .fz-menu-separator { font-size: 20px; }
+  .fz-modal-backdrop { padding: 16px; align-items: center; }
+  .fz-modal-card { min-height: 440px; padding: 32px 24px 86px; }
+  .fz-modal-card h2 { font-size: 44px; line-height: 52px; margin-bottom: 40px; }
+  .fz-modal-card h3 { font-size: 24px; line-height: 32px; margin-bottom: 36px; }
+  .fz-modal-card:has(.fz-direct-contacts) h2 { margin-bottom: 32px; }
+  .fz-modal-card:has(.fz-direct-contacts) h3 { margin-bottom: 36px; }
+  .fz-contact-phone { font-size: 30px; line-height: 38px; }
+  .fz-contact-hint { font-size: 16px; line-height: 24px; margin: 28px 0; }
+  .fz-return-button { top: 24px; right: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .fz-brief-app *, .fz-brief-app *::before, .fz-brief-app *::after { animation: none !important; transition: none !important; } }
