@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import BriefApp from './components/brief/BriefApp.jsx';
+import BriefApp from './components/BriefApp.jsx';
 import '../stylesheets/brief.css';
 
 const mount = document.getElementById('app');

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 
-// Замените заглушки на проверенные контакты бюро перед публикацией.
 const CONTACTS = {
   phone: '', // Пример: '+79991234567'
   telegram: '', // Пример: 'https://t.me/username'
