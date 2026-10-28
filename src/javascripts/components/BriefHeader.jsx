@@ -11,31 +11,31 @@ const navigation = [
 export default function BriefHeader({ menuOpen, onToggleMenu, onCloseMenu, onGoToBrief }) {
   return (
     <>
-      <header className={`fz-header ${menuOpen ? 'is-menu-open' : ''}`}>
+      <header className={`header ${menuOpen ? 'open' : ''}`}>
         <button
           type="button"
-          className={`fz-menu-toggle ${menuOpen ? 'is-open' : ''}`}
+          className={`menu-button ${menuOpen ? 'open' : ''}`}
           onClick={onToggleMenu}
           aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'}
           aria-expanded={menuOpen}
-          aria-controls="fz-site-navigation"
+          aria-controls="site-menu"
         >
-          <span className="fz-plus" aria-hidden="true" />
+          <span className="plus" aria-hidden="true" />
         </button>
-        <span className="fz-brand">Форма следует за функцией</span>
+        <span className="brand">Форма следует за функцией</span>
         {menuOpen ? (
-          <button className="fz-header-cta" type="button" onClick={onGoToBrief}>Обсудить задачу</button>
-        ) : <div className="fz-header-placeholder" />}
+          <button className="menu-cta" type="button" onClick={onGoToBrief}>Обсудить задачу</button>
+        ) : <div className="header-space" />}
       </header>
       {menuOpen && (
-        <nav id="fz-site-navigation" className="fz-menu-panel" aria-label="Навигация по сайту">
-          <div className="fz-menu-column">
+        <nav id="site-menu" className="menu" aria-label="Навигация по сайту">
+          <div className="menu-col">
             {navigation.slice(0, 3).map((item) => (
               <a key={item.label} href={item.href} onClick={onCloseMenu}>{item.label}</a>
             ))}
           </div>
-          <div className="fz-menu-separator" aria-hidden="true">+</div>
-          <div className="fz-menu-column">
+          <div className="menu-plus" aria-hidden="true">+</div>
+          <div className="menu-col">
             {navigation.slice(3).map((item) => (
               <a key={item.label} href={item.href} onClick={onCloseMenu}>{item.label}</a>
             ))}

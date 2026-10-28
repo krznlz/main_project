@@ -27,11 +27,11 @@ const INITIAL_DATA = {
 
 function TextStep({ title, name, value, placeholder, onChange, tall = true }) {
   return (
-    <section className="fz-step-content">
+    <section className="step">
       <h2>{title}</h2>
       <textarea
         aria-label={title}
-        className={`fz-textarea ${tall ? 'fz-textarea-large' : 'fz-textarea-short'}`}
+        className={`textarea ${tall ? 'tall' : 'short'}`}
         name={name}
         value={value}
         placeholder={placeholder}
@@ -43,7 +43,7 @@ function TextStep({ title, name, value, placeholder, onChange, tall = true }) {
 
 function ContactInput({ label, name, value, placeholder, onChange, type = 'text' }) {
   return (
-    <label className="fz-field">
+    <label className="field">
       <span>{label}</span>
       <input
         name={name}
@@ -129,31 +129,39 @@ export default function BriefApp() {
   function openContacts() { setMenuOpen(false); setModal('contacts'); }
 
   return (
-    <div className="fz-brief-app">
+    <div className="brief">
       <BriefHeader
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((previous) => !previous)}
         onCloseMenu={() => setMenuOpen(false)}
-        onGoToBrief={() => { setMenuOpen(false); document.querySelector('.fz-brief-form')?.scrollIntoView({ behavior: 'smooth' }); }}
+        onGoToBrief={() => { setMenuOpen(false); document.querySelector('.form')?.scrollIntoView({ behavior: 'smooth' }); }}
       />
-      <main className={`fz-brief-main ${step === 1 ? 'fz-is-first-step' : ''}`}>
-        <span className="fz-diagonal-arrow" aria-hidden="true">↗</span>
-        <button type="button" className="fz-outline-button fz-contact-action" onClick={openContacts}>
+      <main className={`main ${step === 1 ? 'first' : ''}`}>
+        <span className="arrow" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path
+            d="M6 6L34 34M34 6L6 34"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            />
+          </svg>
+        </span>
+        <button type="button" className="outline contact-button" onClick={openContacts}>
           Связаться без брифа
         </button>
 
-        <form className="fz-brief-form" onSubmit={submitBrief} noValidate>
+        <form className="form" onSubmit={submitBrief} noValidate>
           {step === 1 && (
             <>
-              <div className="fz-intro">
+              <div className="intro">
                 <h1>Расскажите нам о вашей задаче</h1>
                 <p>Укажите то, что уже известно. Остальные детали обсудим при первом разговоре</p>
               </div>
-              <section className="fz-step-content fz-first-task">
+              <section className="step first-task">
                 <h2>Что вы планируете?</h2>
-                <div className="fz-task-grid">
+                <div className="tasks">
                   {TASKS.map((task) => (
-                    <label className="fz-radio-option" key={task}>
+                    <label className="option" key={task}>
                       <input type="radio" name="task" value={task} checked={data.task === task} onChange={handleChange} />
                       <span>{task}</span>
                     </label>
@@ -179,25 +187,25 @@ export default function BriefApp() {
           )}
 
           {step === 5 && (
-            <section className="fz-step-content">
+            <section className="step">
               <h2>Материалы для первого обсуждения</h2>
-              <label className="fz-upload-button">
-                <span className="fz-attachment-icon" aria-hidden="true">↥</span> Прикрепить файлы
+              <label className="upload">
+                <span className="upload-icon" aria-hidden="true">↥</span> Прикрепить файлы
                 <input type="file" multiple hidden onChange={addFiles} aria-label="Прикрепить файлы" />
               </label>
               {files.length > 0 && (
-                <div className="fz-file-list" aria-label="Прикреплённые файлы">
+                <div className="files" aria-label="Прикреплённые файлы">
                   {files.map((file, index) => (
-                    <div className="fz-file-row" key={`${file.name}-${index}`}>
+                    <div className="file" key={`${file.name}-${index}`}>
                       <span>{file.name}</span>
                       <button type="button" onClick={() => removeFile(index)} aria-label={`Удалить файл ${file.name}`}>×</button>
                     </div>
                   ))}
                 </div>
               )}
-              <textarea className="fz-textarea fz-links-textarea" name="materialsLinks" value={data.materialsLinks}
+              <textarea className="textarea links" name="materialsLinks" value={data.materialsLinks}
                 onChange={handleChange} aria-label="Ссылки на материалы" placeholder="Или прикрепите ссылки на материалы" />
-              <p className="fz-help-text">
+              <p className="help">
                 Техническое задание, план участка, эскизы, чертежи или существующая проектная документация.
                 Если материалов нет, пропустите этот шаг.
               </p>
@@ -205,36 +213,36 @@ export default function BriefApp() {
           )}
 
           {step === 6 && (
-            <section className="fz-step-content fz-contacts-step">
+            <section className="step contact-step">
               <h2>Оставьте контакты для связи</h2>
-              <div className="fz-contact-grid">
+              <div className="fields">
                 <ContactInput label="Имя" name="name" value={data.name} placeholder="Как к вам обращаться" onChange={handleChange} />
                 <ContactInput label="Компания и роль в проекте" name="company" value={data.company}
                   placeholder="Название компании, должность" onChange={handleChange} />
               </div>
               <h3>Телефон или почта для связи</h3>
-              <div className="fz-contact-grid">
+              <div className="fields">
                 <ContactInput label="Телефон" type="tel" name="phone" value={data.phone} placeholder="+7" onChange={handleChange} />
                 <ContactInput label="Электронная почта" type="email" name="email" value={data.email}
                   placeholder="name@company.ru" onChange={handleChange} />
               </div>
-              <input className="fz-input fz-messenger" type="text" name="messenger" value={data.messenger}
+              <input className="input messenger" type="text" name="messenger" value={data.messenger}
                 onChange={handleChange} placeholder="Или оставьте ссылку на соцсеть/мессенджер" aria-label="Ссылка на соцсеть или мессенджер" />
-              <label className="fz-consent-option">
+              <label className="consent">
                 <input type="checkbox" name="consent" checked={data.consent} onChange={handleChange} />
                 <span>Даю согласие на обработку персональных данных</span>
               </label>
             </section>
           )}
 
-          {error && <p className="fz-form-error" role="alert">{error}</p>}
+          {error && <p className="error" role="alert">{error}</p>}
 
-          <div className="fz-step-navigation">
-            <button type="button" className="fz-back-button" disabled={step === 1} onClick={previousStep}>
-              <span aria-hidden="true">↖</span>Назад
+          <div className="actions">
+            <button type="button" className="back" disabled={step === 1} onClick={previousStep}>
+              <span aria-hidden="true">←</span>Назад
             </button>
-            <span className="fz-step-count">шаг {step} из 6</span>
-            <button type={step === 6 ? 'submit' : 'button'} className="fz-next-button" onClick={step === 6 ? undefined : nextStep}>
+            <span className="count">шаг {step} из 6</span>
+            <button type={step === 6 ? 'submit' : 'button'} className="next" onClick={step === 6 ? undefined : nextStep}>
               {step === 6 ? 'Отправить заявку' : 'Далее'}
             </button>
           </div>

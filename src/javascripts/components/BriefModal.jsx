@@ -9,9 +9,9 @@ const CONTACTS = {
 
 function SocialLink({ href, label, abbreviation }) {
   if (!href) {
-    return <span className="fz-social is-placeholder" title={`Не задан адрес: ${label}`} aria-label={label}>{abbreviation}</span>;
+    return <span className="social placeholder" title={`Не задан адрес: ${label}`} aria-label={label}>{abbreviation}</span>;
   }
-  return <a className="fz-social" href={href} target="_blank" rel="noreferrer" aria-label={label}>{abbreviation}</a>;
+  return <a className="social" href={href} target="_blank" rel="noreferrer" aria-label={label}>{abbreviation}</a>;
 }
 
 export default function BriefModal({ kind, onClose, onReturnToBrief }) {
@@ -43,36 +43,35 @@ export default function BriefModal({ kind, onClose, onReturnToBrief }) {
   }, [onClose]);
 
   return (
-    <div className="fz-modal-backdrop" onMouseDown={(event) => {
+    <div className="overlay" onMouseDown={(event) => {
       if (event.target === event.currentTarget) onClose();
     }}>
-      <section ref={cardRef} tabIndex={-1} className="fz-modal-card" role="dialog" aria-modal="true" aria-labelledby="fz-modal-title">
-        <button className="fz-modal-x" type="button" onClick={onClose} aria-label="Закрыть попап">×</button>
+      <section ref={cardRef} tabIndex={-1} className={`popup ${isDone ? 'done-popup' : 'contacts-popup'}`} role="dialog" aria-modal="true" aria-labelledby="popup-title">
+        <button className="close" type="button" onClick={onClose} aria-label="Закрыть попап">×</button>
         {isDone ? (
           <>
-            <h2 id="fz-modal-title">Готово!</h2>
+            <h2 id="popup-title">Готово!</h2>
             <h3>Задача отправлена на обсуждение</h3>
-            <p className="fz-modal-small">Мы свяжемся с вами в течение 2-х дней</p>
-            <p className="fz-demo-warning">Демо-версия: данные не были отправлены на сервер.</p>
+            <p className="small">Мы свяжемся с вами в течение 2-х дней</p>
           </>
         ) : (
           <>
-            <h2 id="fz-modal-title">Контакты</h2>
+            <h2 id="popup-title">Контакты</h2>
             <h3>Если не готовы заполнять бриф</h3>
-            <div className="fz-direct-contacts">
+            <div className="contacts">
               {CONTACTS.phone ? (
-                <a className="fz-contact-phone" href={`tel:${CONTACTS.phone.replace(/[^\d+]/g, '')}`}>
+                <a className="phone" href={`tel:${CONTACTS.phone.replace(/[^\d+]/g, '')}`}>
                   {CONTACTS.phone}
                 </a>
-              ) : <p className="fz-contact-phone">[Телефон бюро]</p>}
-              <p className="fz-contact-hint">Или напишите в удобном мессенджере</p>
-              <div className="fz-social-row">
+              ) : <p className="phone">[Телефон бюро]</p>}
+              <p className="note">Или напишите в удобном мессенджере</p>
+              <div className="socials">
                 <SocialLink href={CONTACTS.telegram} label="Telegram" abbreviation="✈" />
                 <SocialLink href={CONTACTS.vk} label="ВКонтакте" abbreviation="VK" />
                 <SocialLink href={CONTACTS.other} label="Другой мессенджер" abbreviation="●" />
               </div>
             </div>
-            <button className="fz-return-button" type="button" onClick={onReturnToBrief}>Вернуться к брифу</button>
+            <button className="return" type="button" onClick={onReturnToBrief}>Вернуться к брифу</button>
           </>
         )}
       </section>
